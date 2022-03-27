@@ -1,0 +1,44 @@
+.auth-reg-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+.auth-reg-form > input{
+    color: #ffa382;
+    border: none;
+    margin: 15px 0px 15px 15px;
+    border-radius: 15px 15px 15px 15px;
+    padding: 15px;
+    font-size: 14px;
+    background-color: #fff;
+    font-family: 'Poppins', sans-serif;
+
+}
+
+.auth-reg-form > input::placeholder{
+    color: #ffa382;
+    text-shadow: 1px;
+}
+
+.auth-reg-form > button{
+    
+    margin: 20px auto 0 auto;
+    padding: 15px;
+    background: #ffecd7;
+    border: none;
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 16px;
+    color: #ffa382;
+    cursor: pointer;
+}
+
+.auth-reg-form > button:hover{
+    background:#ffa382;
+    color: #ffecd7;
+}

@@ -1,0 +1,49 @@
+{% extends 'library_app/template.html' %}
+{% load static %}
+
+{% block header %}
+    {{book.book_title}}
+{%endblock%}
+
+{% block content %}
+
+        <div class="block">
+            <div class="block-header">
+                <h2>
+                    Книга: {{book.book_title}}
+                </h2>
+            </div>
+            <div class="block-content">
+                <div class="book-info">
+                        <img src="{{book.book_picture.url}}" alt="" class="book-image">
+                        <div class="book-detail">
+                            <h1>Название: <a class='dynamic_content'>{{book.book_title}}<a></h1>
+                            <h2>Дата создания: <a class='dynamic_content'>{{book.book_creation_time|date:"d.m.Y"}}</a></h2>
+                            <h2>Автор: <a class='dynamic_content'>{{book.book_author}}</a></h2>
+                        </div>
+                </div>
+
+                <h3>Описание книги</h3>
+                <div class="book-detail-description">
+                    {{book.book_description|safe}}
+                </div>
+
+                <div class="acts">
+                    Главы
+                </div>
+
+                <div class='tbody'>
+                    <table>
+                        <tr><th>Глава</th><th>Дата добавления</th><th>Статус</th></tr>
+                        <tr><td><a href=''>Название_главы<a></td><td>15.12.2021</td><td><div class="book_status">Прочитано</div></td></tr>
+                        <tr><td><a href=''>Название_главы<a></td><td>15.12.2021</td><td><div class="book_status">Прочитано</div></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            
+
+            <div class='block-footer'>
+
+            </div>
+{%endblock%}

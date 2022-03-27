@@ -1,0 +1,40 @@
+.paginator{
+    font-family: 'Poppins', sans-serif; 
+    font-size: 19px;
+    margin: 20px;
+}
+
+.paginator > button{
+    border: none;
+    background: #fff;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 18px;
+    height: 30px;
+    width: 100px;
+    color: #ffa382;
+}
+
+.paginator > button:hover{
+    background:#ffa382;
+    color: #ffecd7;
+}
+
+.Backwards{
+    border-radius: 30px 0 0 30px;
+    
+}
+.Forwards{
+    border-radius: 0 30px 30px 0;
+}
+
+
+.paginator > a { 
+    text-decoration: none; 
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%; 
+    background-repeat: no-repeat; 
+    background-size: 0% 2px; 
+    transition: background-size .3s; 
+    text-decoration: none; 
+    color: #ffecd7; 
+    } 

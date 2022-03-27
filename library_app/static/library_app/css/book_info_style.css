@@ -1,0 +1,118 @@
+.block-content{
+    padding: 0;
+}
+
+.book-info{
+    display: flex;
+    justify-content: left;
+    padding: 15px;
+}
+
+.book-image{
+    border-radius: 15px;
+    width: 275px;
+    height: 350px;
+}
+
+.book-detail{
+    width: 100%;
+    height: 100%;
+    padding: 0 0px 10px 10px;
+    text-align: justify;
+}
+
+.dynamic_content{
+    color: #ffecd7;
+}
+
+.book-detail-description{
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    display: block;
+    background: #606060;
+    text-align: justify;
+    padding: 10px;
+    border-radius: 15px;
+    border: #ffa382 solid 2px;
+    color: #ffecd7;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 17px;
+}
+
+
+.book-detail > h1{
+    color: #ffc3ae;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 30px;
+    margin: 0;
+    padding: 1px;
+}
+
+.book-detail > h2{
+    color: #ffc3ae;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 22px;
+    margin: 0;
+    padding: 3px;
+}
+
+h3{
+    color: #ffc3ae;
+    text-align: left;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 22px;
+    margin: 0 0 0 15px;
+    padding: 3px;
+    
+}
+
+.acts{
+    background: #606060;
+    padding: 20px;
+    border-top: #ffa382 solid 1px;
+    border-bottom: #ffa382 solid 1px;
+    color: #ffecd7;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 19px;
+}
+
+table{
+    width: 100%;
+    font-family: 'Poppins', sans-serif; 
+    border-collapse: collapse;
+}
+
+.tbody{
+    padding: 10px;
+}
+
+td > a{
+    color: #ffecd7;;
+    text-decoration: none;
+}
+
+.book_status{
+    color: #125f1f;
+    padding: 2px;
+    background-color: #4cd964;
+    border-radius: 5px;
+}
+
+tr{
+    margin-bottom: 10px;
+}
+
+tr > th{
+    color: #ffc3ae;
+    padding:1rem 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+tr > td{
+    color: #ffecd7;;
+    font-size: 20px;
+}

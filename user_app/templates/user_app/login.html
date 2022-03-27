@@ -1,0 +1,33 @@
+{% extends 'library_app/template.html' %}
+{% load static %}
+
+
+{% block content %}
+
+        <div class="block">
+            <div class="block-header">
+                <h2>
+                    Авторизация пользователя
+                </h2>
+            </div>
+            <div class="block-content">
+                <form method="POST" class="auth-reg-form" action=''>
+                    {% csrf_token %}
+                    {% for message in messages %}
+                        {{message}}
+                    {% endfor %}
+                    <input type="text" placeholder="Введите логин" name='username'>
+                    <input type="password" placeholder="Введите пароль" name='password'>
+                    <button type='submit'>Авторизоваться</button>
+                </form>
+            </div>
+
+            <div class='block-footer'>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock%}

@@ -1,0 +1,30 @@
+{% extends 'library_app/template.html' %}
+{% load static %}
+
+{% block header %}
+    Создание книги
+{%endblock%}
+
+{% block content %}
+
+        <div class="block">
+            <div class="block-header">
+                <h2>
+                    Создание книги
+                </h2>
+            </div>
+            <div class="block-content">
+                
+                <form method='POST' enctype='multipart/form-data' style='padding: 10px;'>
+                    {% csrf_token %}
+                    {{form.media}}
+                    {{form.as_p}}
+
+                    <button>Создание</button>
+                </form>
+
+            </div>
+            <div class='block-footer'>
+
+            </div>
+{%endblock%}

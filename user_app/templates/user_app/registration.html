@@ -1,0 +1,49 @@
+{% extends 'library_app/template.html' %}
+{% load static %}
+
+{% block content %}
+
+        <div class="block">
+            <div class="block-header">
+                <h2>
+                    Регистрация пользователя
+                </h2>
+            </div>
+            <div class="block-content">
+                <!--
+                    Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.
+
+
+                    Пароль не должен быть слишком похож на другую вашу личную информацию.
+                    Ваш пароль должен содержать как минимум 8 символов.
+                    Такой пароль часто используется.
+                    Пароль не может состоять только из цифр.
+
+                    Для подтверждения введите, пожалуйста, пароль ещё раз.
+                -->
+                <form method="POST" class="auth-reg-form" action=''>
+                    {% csrf_token %}
+                    {% for message in messages %}
+                        {{message}}
+                    {% endfor %}
+                    {{form.username}}
+                    {{form.email}}
+                    {{form.password1}}
+                    {{form.password2}}
+                    <!-- <input type="email" placeholder="Введите почту">
+                    <input type="text" placeholder="Введите логин">
+                    <input type="password" placeholder="Введите пароль">
+                    <input type="password" placeholder="Подтвердите пароль"> -->
+                    <button type='submit' >Зарегистрироваться</button>
+                </form>
+            </div>
+
+            <div class='block-footer'>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

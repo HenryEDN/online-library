@@ -1,0 +1,169 @@
+/* Блок "Новинки" */
+
+.News_icon{
+    height: 25px;
+    width: 25px;
+}
+
+.ShelfItem{
+    display: inline-block;
+    margin: 25px;
+}
+
+.BookImg{
+    background-color: #ffecd7;
+    width: 225px;
+    height: 275px;
+    border-radius: 7px 7px 0px 0px;
+    border-bottom: 5px solid #ffa382;
+}
+
+.BookImg > img{
+
+    border-radius: 7px 7px 0px 0px;
+    width: 225px;
+    height: 275px;
+}
+
+.BookStatus{
+    position: absolute;
+    width: 225px;
+    height: 20px;
+    border-radius: 7px 7px 0px 0px;
+    /* margin: 0 0 0 auto ; */
+    text-align: center;
+    /* width: 40%; */
+    /* opacity: 0.75; */
+}
+
+.BookFooter{
+    background-color: #606060;
+    padding: 5px;
+    border-radius: 0px 0px 7px 7px;
+}
+
+.BookInfo > h3{
+    color: #ffecd7;
+    font-family: 'Poppins', sans-serif; 
+    text-align: center;
+    font-size: 12px;
+}
+
+.BookInfo{
+    padding: 15px 5px 10px 5px;
+    display: flex;
+    align-items: center;
+    color: #ffecd7;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 10px;
+    text-decoration: none;
+}
+
+.book_title{
+    color: #ffecd7;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.Rating{
+    display: flex;
+    align-items: center;
+    margin-right: auto; 
+}
+
+.Rating_icon{
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    margin-right: 5px;
+}
+
+.Views{
+    display: flex;
+    align-items: center;
+    margin-left: auto; 
+}
+
+.Views_icon{
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    margin-right: 5px;
+}
+
+/* Конец блока */
+
+/* Блок "Новости" */
+
+.alert-icon{
+    height: 25px;
+    width: 25px;
+}
+
+#news-block{
+    background-color: #8e8e93;
+    border-radius: 15px;
+}
+
+#news-header{
+    margin-top: 10px;
+}
+
+.news-article{
+    background-color: #8e8e93;
+    border-radius: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.news-article-header{
+    padding: 5px;
+    background-color: #606060;
+    margin-top: 20px;
+    border-radius:7px 7px 0 0;
+    text-align: center;
+}
+
+.news-article-header > h3 {
+    color: #ffecd7;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 15px;
+}
+
+.news-article-image{
+    padding: 30px;
+    max-height: 200px;
+    border-left: 2px solid #606060;
+    border-right: 2px solid #606060;
+    background-color: #ffa382;
+    text-align: center;
+}
+
+.news-article-content{
+    background-color: #ffecd7;
+    text-align: justify;
+    font-size: 14px;
+    padding: 10px;
+    font-family: 'Poppins', sans-serif; 
+    border-left: 2px solid #606060;
+    border-right: 2px solid #606060;
+}
+
+.news-article-footer{
+    display: flex;
+    justify-content: center;
+    background-color: #606060;
+    border-radius: 0 0 7px 7px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.news-article-footer-date{
+    color: #ffecd7;
+    margin-left: auto;  
+    font-family: 'Poppins', sans-serif;
+    padding-right: 15px; 
+}
+
+/* Конец блока */

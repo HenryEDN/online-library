@@ -1,0 +1,93 @@
+{% extends 'library_app/template.html' %}
+{% load static %}
+
+{% block content %}
+        
+     <!-- Блок "Новинки" -->
+
+        <div class="block">
+            <div class="block-header">
+                <h2>
+                    <img class='News_icon'src="{% static 'library_app/images/new' %}" alt="new_icon">
+                    Новинки
+                </h2>
+            </div>
+            <div class="block-content">
+                {% for el in book_shelf %}
+                <div class="ShelfItem">
+                    <div class='BookImg'>
+                        <img src="{{el.book_picture.url}}" alt="">
+                    </div>
+                    <div class="BookFooter">
+                        <a href='{% url 'detail' el.id %}' class='book_title'>{{el.book_title}}</a>
+                        <div class="BookInfo">
+                            <h3 class='Rating'>
+                                {% if el.book_rate > 0 %}
+                                    <img class='Rating_icon'src="{% static 'library_app/images/smile' %}" alt="rate_icon">
+                                {% elif el.book_rate == 0%}
+                                <img class='Rating_icon'src="{% static 'library_app/images/meh.png' %}" alt="rate_icon">
+                                {% else %}
+                                    <img class='Rating_icon'src="{% static 'library_app/images/sad' %}" alt="rate_icon">
+                                {% endif%}
+                                {{el.book_rate}}
+                            </h3>
+                            <h3 class='Views'>
+                                <img class='Views_icon'src="{% static 'library_app/images/view_icon' %}" alt="view_icon">
+                                {{el.book_views}}
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class='block-footer'>
+
+            </div>
+
+        </div>
+
+        <!-- Конец блока -->
+
+        <!-- Блок "Новости" -->
+
+        <div class="block" id='news-block'>
+
+            <div class='block-header' id='news-header'>
+                <h2>
+                    <img class='alert-icon'src="{% static 'library_app/images/notification' %}" alt="alrt_icon">
+                    Новости
+                </h2>
+            </div>
+
+            <div class='news-article'>
+                <div class='news-article-header'>
+                    <h3>Создание веб-сайта</h3>
+                </div>
+                <div class="news-article-image">
+                    Image
+                </div>
+                <div class="news-article-content">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. 
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
+                    dolore eu fugiat nulla pariatur. 
+                    Excepteur sint occaecat cupidatat non proident, 
+                    sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </div>
+                <div class='news-article-footer'>
+                    <div class='news-article-footer-date'>
+                        10.12.21
+                    </div>
+                </div>
+            </div>
+
+            <div class='block-footer'>
+
+            </div>
+
+        </div>
+
+        <!-- Конец блока -->
+{% endblock %}

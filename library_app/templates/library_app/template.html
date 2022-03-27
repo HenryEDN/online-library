@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='shortcut icon' href={% static 'library_app/images/OL_Icon.png' %}>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href={% static 'library_app/css/style.css' %}>
+    <link rel="stylesheet" href={% static 'library_app/css/main_style.css' %}>
+    <link rel="stylesheet" href={% static 'library_app/css/books_style.css' %}>
+    <link rel="stylesheet" href={% static 'library_app/css/book_info_style.css' %}>
+    <link rel="stylesheet" href={% static 'user_app/css/form_style.css' %}>
+    <link rel="stylesheet" href={% static 'user_app/css/profile_style.css' %}>
+    <script src={% static 'library_app/js/script.js' %}></script>
+    <title>
+        {% block header %}
+            {{header}}
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <div class="header">
+
+        <div class="dropdown" data-dropdown>
+            <button class="link" data-dropdown-button> Меню </button>
+            <div class="dropdown-menu">
+                <div class="information-grid">
+                    <div class="topic"><b>Работы</b>
+                        <div class="dropdown-links">
+                            <a href="#" class="choice">Все работы</a>
+                            <a href="#" class="choice">Новые работы</a>
+                            <a href="#" class="choice">Популярные работы</a>
+                        </div>
+                    </div>
+                    <div class="topic"><b>Аккаунт</b>
+                        {% if request.user.is_authenticated%}
+                        <div class="dropdown-links">
+                            <a href="#" class="choice">Профиль</a>
+                            <a href="#" class="choice">Библиотека пользователя</a>
+                            <a href="#" class="choice">Редактировать профиль</a>
+                            <a href='{% url 'logout' %}' class="choice">Выйти</a>
+                        </div>
+                        {% else %}
+                        <div class="dropdown-links">
+                            <a href='{% url 'login' %}' class="choice">Войти</a>
+                            <a href='{% url 'registration' %}' class="choice">Зарегистрироваться</a>
+                            <a href="#" class="choice">Восстановить пароль</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% if request.user.is_authenticated %}
+                    <div class="topic"><b>Создать работу</b>
+                        <div class="dropdown-links">
+                            <a href="{% url 'create'%}" class="choice">Написать</a>
+                            <a href="#" class="choice">Редактировать</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="topic"><b>О проекте</b>
+                        <div class="dropdown-links">
+                            <a href="#" class="choice">О нас</a>
+                            <a href="#" class="choice">Цель проекта</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class='searchBar'>
+            <input type="Text" name="Search" class="searchBar-input" placeholder="Поиск">
+            <button type="Submit" class="searchBar-button">
+                <img src="{% static 'library_app/images/search.png' %}" alt="" class="searchBar-image">
+            </button>
+        </div>
+        {% if request.user.is_authenticated %}
+            
+                <a href="#" ><b>{{request.user.username}}</b></a>
+                <div class="pfImage"></div>
+        
+        {% else %}
+            <div class="auth_reg_but">
+                <a href='{% url 'login' %}' class="second-button"><b>Войти</b></a>
+                <a href='{% url 'registration' %}' class="second-button"><b>Зарегистрироваться</b></a>
+            </div>
+        {% endif %}
+    </div>
+
+
+    <div class="body">
+
+        {% block content %}
+
+        {% endblock %}
+
+    </div>
+    <div class="footer"> 
+    </div>
+</body>
+</html>
