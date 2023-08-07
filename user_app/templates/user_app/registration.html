@@ -23,9 +23,19 @@
                 -->
                 <form method="POST" class="auth-reg-form" action=''>
                     {% csrf_token %}
-                    {% for message in messages %}
-                        {{message}}
-                    {% endfor %}
+
+                    {% comment %} <div class='validation-error'> {% endcomment %}
+                    
+                    <div class="center-block">
+                        {{form.username.errors.as_ul}}
+                        {{form.email.errors.as_ul}}
+                        {{form.password1.errors.as_ul}}
+                        {{form.password2.errors.as_ul}}
+
+                        {% comment %} {%for error in form.password2.errors.as_ul%}
+                            {{error}}
+                        {%endfor%} {% endcomment %}
+
                     {{form.username}}
                     {{form.email}}
                     {{form.password1}}
@@ -34,7 +44,9 @@
                     <input type="text" placeholder="Введите логин">
                     <input type="password" placeholder="Введите пароль">
                     <input type="password" placeholder="Подтвердите пароль"> -->
-                    <button type='submit' >Зарегистрироваться</button>
+                    <button type='submit' >Зарегистрироваться</button><br>
+                    <span>У вас уже есть аккаунт? <a href='{% url 'login' %}'>Авторизоваться</a> </span>
+                    </div>
                 </form>
             </div>
 

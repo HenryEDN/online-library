@@ -1,0 +1,141 @@
+{% extends 'library_app/template.html' %}
+{% load static %}
+
+{% block header %}
+    {{header}}
+{%endblock%}
+
+{% block content %}
+<link rel="stylesheet" href={% static 'user_app/css/profile_style.css' %}>
+
+
+
+
+        <div class="block">
+            <div class="block-header">
+                <h2>
+                     Список книг "{{header}}" ({{books.count}})
+                </h2>
+            </div>
+            <div class="block-content" style="padding-top: 10px; padding-bottom: 30px;">
+                {% for message in messages %}                    
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> 
+                        {{message}}
+                    </div>
+                {% endfor %}
+                <div class='chapter-navigation'>
+                    {% if header != 'Читаю' %}
+                        <a href="{% url 'booklist2' request.user.id 'read'%}"  class="book-status">Читаю</a>
+                    {% else %}
+                        <a class="silent">Читаю</a>
+                    {% endif %}
+                    {% if header != 'В планах' %}
+                        <a href="{% url 'booklist2' request.user.id 'in_plans'%}"  class="book-status">В планах</a>
+                    {% else %}
+                        <a class="silent">В планах</a>
+                    {% endif %}
+                    {% if header != 'Прочитано' %}
+                        <a href="{% url 'booklist2' request.user.id 'red'%}"  class="book-status">Прочитано</a>
+                    {% else %}
+                        <a class="silent">Прочитано</a>
+                    {% endif %}
+                </div>
+            <table id="myTable" style="margin-top: 20px;">
+                <tr class="table-content"> 
+                    <div class="tabcontent">
+                        <table id="myTable">
+                            <tr class="table-header">
+                                <th style="width:50%;">Название</th>
+                                <th style="width:30%;">Дата добавления</th>
+                                <th style="width:20%;">Действия</th>
+                            </tr>
+                            
+                            {%for i in books%}    
+                            <tr class="table-content">
+                            <td>
+                                <div class="table-data">
+                                    <img class="book-image"
+                                        src="{% if i.book.book_picture%}
+                                                {{i.book.book_picture.url}}
+                                            {% endif %}"
+                                    alt=""></img>
+                                    <a id='read_link'href='{% url 'detail' i.book.id %}'>{{i.book.book_title}}</a>
+                                </div>
+                            </td>
+                            <td>{{i.book.book_creation_time|date:"d.m.Y"}}</td> 
+                                <td> 
+                                    <div class="button-row">
+                                        <a class='delete' href='{% url 'userstatus' i.book.id key redirect %}'>✕</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {%endfor%}
+                        </table>
+                        {% if not books%}
+                        <div class='announce'>
+                            В списке "{{header}}" пока нет книг.
+                        </div>
+                        {% endif %}
+                        <div class="end-table"></div>
+            </table>
+        </div>
+    </div>
+
+    
+
+    <div class='block-footer'>
+    </div>
+
+<style>
+    .chapter-navigation{
+        margin-top: 10px;
+        background: #606060;
+        text-align: center;
+        padding: 0px;
+        {% comment %} border-top: #ffa382 solid 1px;
+        border-bottom: #ffa382 solid 1px; {% endcomment %}
+        color: #ffecd7;
+        font-family: 'Poppins', sans-serif; 
+        font-size: 19px;
+    }
+    
+    .chapter-navigation > a{
+        display: inline-flex;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    
+    .chapter-navigation > .silent{
+        background-color: #ffa382;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 8px 50px;
+        border: none;
+        border-radius: 7px;
+        font-family: 'Poppins', sans-serif; 
+        font-size: 16px;
+        color: #ffecd7;
+        text-decoration:  none;
+    }
+    .book-status{
+        background-color: #ffecd7;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 8px 50px;
+        border: none;
+        border-radius: 7px;
+        font-family: 'Poppins', sans-serif; 
+        font-size: 16px;
+        color: #444444;
+        cursor: pointer;
+        text-decoration:  none;
+    }
+    
+    .book-status:hover{
+        background: #ffa382;
+        color: #444444;
+    }
+</style>
+
+{% endblock %}

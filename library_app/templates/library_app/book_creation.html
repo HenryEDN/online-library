@@ -7,6 +7,10 @@
 
 {% block content %}
 
+<link rel="stylesheet" href={% static 'library_app/css/book_creation_style.css' %}>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
         <div class="block">
             <div class="block-header">
                 <h2>
@@ -15,14 +19,41 @@
             </div>
             <div class="block-content">
                 
-                <form method='POST' enctype='multipart/form-data' style='padding: 10px;'>
-                    {% csrf_token %}
-                    {{form.media}}
-                    {{form.as_p}}
+                <div class='creation_body'>
+                    <form method='POST' enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        {% for message in messages %}                    
+                            <div class="alert">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> 
+                                {{message}}
+                            </div>
+                        {% endfor %}
+                        
+                        <div class='wrapper'>
+                            <div class='book_preview' id="book_preview"> 
+                                <img id="output"></img>
+                                <div class='picture_input_field'>    
+                                    <label>Обложка книги</label>
+                                    {{form.book_picture}}
+                                </div>
+                            </div>
 
-                    <button>Создание</button>
-                </form>
+                            <div class='book_data'>
+                                <label>Название книги</label><br>
+                                {{form.book_title}}<br>
+                                <label>Жанр книги</label><br>
+                                {{form.book_genre}}<br>
+                            </div>  
+                        </div>
 
+                        <div class='book_description_field'>
+                            <label style="text-align: left;">Описание книги</label>
+                            {{form.book_description}}
+                        </div>
+
+                        <button class="submit-button">Опубликовать</button>
+                    </form>
+                </div>    
             </div>
             <div class='block-footer'>
 

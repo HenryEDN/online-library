@@ -1,32 +1,233 @@
+{% extends 'library_app/template.html' %}
+{% load static %}
 
+
+
+{% block content %}
+<link rel="stylesheet" href={% static 'user_app/css/profile_style.css' %}>
         <div class="block">
             <div class="block-header" id="profile">
                 <h2>
-                    <img class='Profile_icon'src="icons/profile" alt="new_icon">
+                    <img class='Profile_icon' src="{% static 'user_app/images/profile' %}" alt="new_icon">
                     Профиль пользователя
                 </h2>
             </div>
             <div class="block-content" id="profile-block-content">
+                {% for message in messages %}                    
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> 
+                        {{message}}
+                    </div>
+                {% endfor %}
                 <div class="profile-block">
                     <div class="profile-picture-block">
-                        <div class="profile-image"></div>
+                        <img class="profile-image" src='
+                        {%if user_info.profile_picture%} 
+                        {{user_info.profile_picture.url}}
+                        {%endif%}
+                        '></img>
+
+
+                        <div class='profile-user-image-data'>
+                            <h1>{{user_info.nickname}}</h1>
+                            {%if request.user.id == user.id%}
+                            <a href='{% url 'profile_update' user.id%}'>Изменить профиль</a>
+                            {%endif%}
+                        </div>
+                    
                     </div>
                     <div class='profile-user-data'>
-                        <h1>Username</h1>
-                        <h2>Дата регистрации: 17.10.2021</h2>
-                        <h2>О пользователе:</h2>
+                        <h2>О пользователе</h2>
                         <div class="profile-user-data-description">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-                                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                laboris nisi ut aliquip ex ea commodo consequat. 
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum 
-                                dolore eu fugiat nulla pariatur. 
-                                Excepteur sint occaecat cupidatat non proident, 
-                                sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                qui officia deserunt 
+                            {{user_info.about_user|safe}}
                         </div>
                     </div>
+                </div>
+            </div>
+            
+            <div class="tab">
+                <button class="tablinks" style='width: 25%' onclick="openCity(event, 'UserBook')">Книги пользователя</button>
+                <button class="tablinks" style='width: 15%' onclick="openCity(event, 'Read')">Читает</button>
+                <button class="tablinks" style='width: 30%' onclick="openCity(event, 'Plan')">Планирует прочитать</button>
+                <button class="tablinks" style='width: 20%' onclick="openCity(event, 'Red')">Прочитано</button>
+              </div>
+              
+            <div class="Book-table"> 
+                <div id="UserBook" class="tabcontent">
+                    <button class='Close_content' onclick="this.parentElement.style.display='none'">Скрыть таблицу</button>
+                    <table id="myTable">
+                        <tr class="table-header">
+                        {%if request.user.id == user.id%}   
+                            <th style="width:50%;">Название</th>
+                            <th style="width:30%;">Дата добавления</th>
+                            <th style="width:20%;">Действия</th>
+                        {%else%}
+                            <th style="width:60%;">Название</th>
+                            <th style="width:40%;">Дата добавления</th>
+                        {%endif%}
+                        </tr>
+                        {%for book in books%}    
+                            <tr class="table-content">
+                            <td>
+                                <div class="table-data">
+                                    <img class="book-image"
+                                        src="{% if book.book_picture%}
+                                                {{book.book_picture.url}}
+                                            {% endif %}"
+                                    alt=""></img>
+                                    <a id='read_link'href='{% url 'detail' book.id %}'>{{book.book_title}}</a>
+                                </div>
+                            </td>
+                            <td>{{book.book_creation_time|date:"d.m.Y"}}</td>
+                                {%if request.user.id == user.id%}  
+                                <td> 
+                                    <div class="button-row">
+                                        <a class='edit' href='{% url 'update' book.id %}'>✎</a>
+                                        <a class='delete' href='{% url 'delete' book.id %}'>✕</a>
+                                    </div>
+                                </td>
+                                {%endif%}
+                            </tr>
+                        {%endfor%}
+                    </table>
+                    {% if not books%}
+                        <div class='announce'>
+                            В списке "Книги пользователя" пока нет книг.
+                        </div>
+                    {% endif %}
+                    <div class="end-table"></div>
+                </div>
+                
+                <div id="Read" class="tabcontent">
+                    <button class='Close_content' onclick="this.parentElement.style.display='none'">Скрыть таблицу</button>
+                    <table id="myTable">
+                        <tr class="table-header">
+                        {%if request.user.id == user.id%}   
+                            <th style="width:50%;">Название</th>
+                            <th style="width:30%;">Дата добавления</th>
+                            <th style="width:20%;">Действия</th>
+                        {%else%}
+                            <th style="width:60%;">Название</th>
+                            <th style="width:40%;">Дата добавления</th>
+                        {%endif%}
+                        </tr>
+                        {%for i in read%}    
+                            <tr class="table-content">
+                            <td>
+                                <div class="table-data">
+                                    <img class="book-image"
+                                        src="{% if i.book.book_picture%}
+                                                {{i.book.book_picture.url}}
+                                            {% endif %}"
+                                    alt=""></img>
+                                    <a id='read_link'href='{% url 'detail' i.book.id %}'>{{i.book.book_title}}</a>
+                                </div>
+                            </td>
+                            <td>{{i.book.book_creation_time|date:"d.m.Y"}}</td>
+                                {%if request.user.id == user.id%}  
+                                <td> 
+                                    <div class="button-row">
+                                        <a class='delete' href='{% url 'userstatus' i.book.id 2 "2" %}'>✕</a>
+                                    </div>
+                                </td>
+                                {%endif%}
+                            </tr>
+                        {%endfor%}
+                    </table>
+                    {% if not read%}
+                        <div class='announce'>
+                            В списке "Читает" пока нет книг.
+                        </div>
+                    {% endif %}
+                    <div class="end-table"></div>
+                </div>
+                
+                <div id="Red" class="tabcontent">
+                    <button class='Close_content' onclick="this.parentElement.style.display='none'">Скрыть таблицу</button>
+                    <table id="myTable">
+                        <tr class="table-header">
+                        {%if request.user.id == user.id%}   
+                            <th style="width:50%;">Название</th>
+                            <th style="width:30%;">Дата добавления</th>
+                            <th style="width:20%;">Действия</th>
+                        {%else%}
+                            <th style="width:60%;">Название</th>
+                            <th style="width:40%;">Дата добавления</th>
+                        {%endif%}
+                        </tr>
+                        {%for i in red%}    
+                        <tr class="table-content">
+                        <td>
+                            <div class="table-data">
+                                <img class="book-image"
+                                    src="{% if i.book.book_picture%}
+                                            {{i.book.book_picture.url}}
+                                        {% endif %}"
+                                alt=""></img>
+                                <a id='read_link'href='{% url 'detail' i.book.id %}'>{{i.book.book_title}}</a>
+                            </div>
+                        </td>
+                        <td>{{i.book.book_creation_time|date:"d.m.Y"}}</td>
+                            {%if request.user.id == user.id%}  
+                            <td> 
+                                <div class="button-row">
+                                    <a class='delete' href='{% url 'userstatus' i.book.id 0 '2' %}'>✕</a>
+                                </div>
+                            </td>
+                            {%endif%}
+                        </tr>
+                    {%endfor%}
+                    </table>
+                    {% if not red%}
+                        <div class='announce'>
+                            В списке "Прочитано" пока нет книг.
+                        </div>
+                    {% endif %}
+                    <div class="end-table"></div>
+                </div>
+
+                <div id="Plan" class="tabcontent">
+                    <button class='Close_content' onclick="this.parentElement.style.display='none'">Скрыть таблицу</button>
+                    <table id="myTable">
+                        <tr class="table-header">
+                        {%if request.user.id == user.id%}   
+                            <th style="width:50%;">Название</th>
+                            <th style="width:30%;">Дата добавления</th>
+                            <th style="width:20%;">Действия</th>
+                        {%else%}
+                            <th style="width:60%;">Название</th>
+                            <th style="width:40%;">Дата добавления</th>
+                        {%endif%}
+                        </tr>
+                        {%for i in in_plans%}    
+                        <tr class="table-content">
+                        <td>
+                            <div class="table-data">
+                                <img class="book-image"
+                                    src="{% if i.book.book_picture%}
+                                            {{i.book.book_picture.url}}
+                                        {% endif %}"
+                                alt=""></img>
+                                <a id='read_link'href='{% url 'detail' i.book.id %}'>{{i.book.book_title}}</a>
+                            </div>
+                        </td>
+                        <td>{{i.book.book_creation_time|date:"d.m.Y"}}</td>
+                            {%if request.user.id == user.id%}  
+                            <td> 
+                                <div class="button-row">
+                                    <a class='delete' href='{% url 'userstatus' i.book.id 1 "2" %}'>✕</a>
+                                </div>
+                            </td>
+                            {%endif%}
+                        </tr>
+                    {%endfor%}
+                    </table>
+                    {% if not in_plans%}
+                        <div class='announce'>
+                            В списке "В планах" пока нет книг.
+                        </div>
+                    {% endif %}
+                    <div class="end-table"></div>
                 </div>
             </div>
             
@@ -35,4 +236,8 @@
             </div>
 
         </div>
+
+        </div>
+
+{%endblock%}
         

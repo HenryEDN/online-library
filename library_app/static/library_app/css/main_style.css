@@ -13,7 +13,7 @@
 .BookImg{
     background-color: #ffecd7;
     width: 225px;
-    height: 275px;
+    height: 300px;
     border-radius: 7px 7px 0px 0px;
     border-bottom: 5px solid #ffa382;
 }
@@ -22,7 +22,7 @@
 
     border-radius: 7px 7px 0px 0px;
     width: 225px;
-    height: 275px;
+    height: 300px;
 }
 
 .BookStatus{
@@ -42,11 +42,25 @@
     border-radius: 0px 0px 7px 7px;
 }
 
+.BookFooter > a{
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%; 
+    background-repeat: no-repeat; 
+    background-size: 0% 2px; 
+    transition: background-size .3s; 
+    cursor: pointer;
+}
+
+.BookFooter > a:hover{
+    color: #ffa382;
+    background-size: 100% 1px; 
+}
+
 .BookInfo > h3{
     color: #ffecd7;
     font-family: 'Poppins', sans-serif; 
     text-align: center;
-    font-size: 12px;
+    font-size: 16px;
 }
 
 .BookInfo{
@@ -89,7 +103,8 @@
     width: 25px;
     height: 25px;
     padding: 0;
-    margin-right: 5px;
+    margin-left: 5px;
+    margin-right: 10px;
 }
 
 /* Конец блока */
@@ -164,6 +179,21 @@
     margin-left: auto;  
     font-family: 'Poppins', sans-serif;
     padding-right: 15px; 
+}
+
+.welcome-speech{
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    display: block;
+    background: #606060;
+    text-align: justify;
+    padding: 10px;
+    border-radius: 15px;
+    /* border: #ffa382 solid 1px; */
+    color: #ffecd7;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 17px;
 }
 
 /* Конец блока */

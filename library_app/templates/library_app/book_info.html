@@ -1,11 +1,17 @@
 {% extends 'library_app/template.html' %}
 {% load static %}
 
+{% block meta %}
+
+{% endblock%}
+
 {% block header %}
     {{book.book_title}}
 {%endblock%}
 
 {% block content %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 
         <div class="block">
             <div class="block-header">
@@ -14,13 +20,110 @@
                 </h2>
             </div>
             <div class="block-content">
+                {% for message in messages %}                    
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> 
+                        {{message}}
+                    </div>
+                {% endfor %}
                 <div class="book-info">
-                        <img src="{{book.book_picture.url}}" alt="" class="book-image">
+                        <img 
+                            src="{% if book.book_picture%}
+                                {{book.book_picture.url}}
+                            {% endif %}"
+                         alt="" class="book-image">
                         <div class="book-detail">
-                            <h1>Название: <a class='dynamic_content'>{{book.book_title}}<a></h1>
-                            <h2>Дата создания: <a class='dynamic_content'>{{book.book_creation_time|date:"d.m.Y"}}</a></h2>
-                            <h2>Автор: <a class='dynamic_content'>{{book.book_author}}</a></h2>
+                            <h2>Название: <span class='dynamic_content'>{{book.book_title}}<span></h1>
+                            <h2>Жанр: <a class='dynamic_content' href='{% url 'genre' book.book_genre.name %}'>{{book.book_genre}}</a></h2>
+                            <h2>Автор: <a class='dynamic_content' href='{% url 'profile' book.book_author.id %}'>{{book.book_author}}</a></h2>
+                            <h2>Дата создания: <span class='dynamic_content'>{{book.book_creation_time|date:"d.m.Y"}}</span></h2>
+                            <h2>Количество просмотров: <span class='dynamic_content'>
+                                {{book.book_views}}
+                                </span></h2>
+                            <h2>
+                                {% if request.user.is_authenticated == False%}
+                                <div 
+                                    style="
+                                        display: inline-flex; 
+                                        align-items: center; 
+                                        background: #606060; 
+                                        padding: 10px 20px 10px 5px; 
+                                        border-radius: 7px
+                                    ">
+                
+                                    {% if book.book_rate > 0 %}
+                                        <img class='Rating_icon' style="height: 40px; width: 40px; margin-right: 20px" src="{% static 'library_app/images/smile' %}" alt="rate_icon">
+                                    {% elif book.book_rate == 0%}
+                                    <img class='Rating_icon' style="height: 40px; width: 40px; margin-right: 20px" src="{% static 'library_app/images/meh.png' %}" alt="rate_icon">
+                                    {% else %}
+                                        <img class='Rating_icon' style="height: 25px; width: 25px; margin-right: 20px" src="{% static 'library_app/images/sad' %}" alt="rate_icon">
+                                    {% endif%}
+                                    {{book.book_rate}}
+                                </div>
+                                {% endif %}
+                            </h2>
                         </div>
+                            {% if request.user.is_authenticated%}
+                            <div class='actions' style='{%if request.user.id == book.book_author.id%} height: 130px; {% endif %}'>
+                                <span>Действие над книгой</span><br><br>
+                                {%if request.user.id == book.book_author.id%}  
+                                    <a class='Edit' href='{% url 'update' book.id %}'>Редактировать</a><br><br>
+                                    <a class='Delete' href='{% url 'delete' book.id %}'>Удалить</a>
+                                {% else %}
+                                    <a {% if user_status.status.id != 4%}
+                                        class='book-status' style='padding: 8px 59px' href='{% url 'userstatus' book.id 2 "1" %}'
+                                        {% else %}
+                                        class='active-status' style='padding: 8px 59px' href='{% url 'userstatus' book.id 2 "1" %}'
+                                        {% endif %}>Читаю</a><br><br>
+                                    <a {% if user_status.status.id != 2%}
+                                        class='book-status' style='padding: 8px 5px' href='{% url 'userstatus' book.id 1 "1" %}'
+                                        {% else %}
+                                        class='active-status' style='padding: 8px 5px' href='{% url 'userstatus' book.id 1 "1" %}'
+                                        {% endif %}>Планирую прочитать</a><br><br>
+                                    <a {% if user_status.status.id != 1%}
+                                        class='book-status' style='padding: 8px 43px' href='{% url 'userstatus' book.id 0 "1" %}'
+                                        {% else %}
+                                        class='active-status' style='padding: 8px 43px' href='{% url 'userstatus' book.id 0 "1" %}'
+                                        {% endif %}>Прочитано</a><br><br>
+                                {% endif %}
+                                <h2>
+                                    <span class='dynamic_content' >
+                                    {% if request.user.is_authenticated %}
+                                    <div 
+                                    style="
+                                        background: #606060; 
+                                        width: 175px;
+                                        padding: 15px 0px 15px 5px;
+                                        border-radius: 7px
+                                    ">
+                                    <a href='{% url 'upvote' book.id %}' class="{%if user_rate.rate == 1%} vote_active {% else %} vote {%endif%}" style='margin-right: 5px'>▲</a>
+                                    {{book.book_rate}}
+                                    <a href='{% url 'downvote' book.id %}' class="{%if user_rate.rate == 2%} vote_active {% else %} vote {%endif%}" style='margin-left: 5px'>▼</a>
+                                    <div>
+                                    {% else %}
+                                    <div 
+                                    style="
+                                        display: inline-flex; 
+                                        align-items: center; 
+                                        background: #606060; 
+                                        padding: 10px 20px 10px 5px; 
+                                        border-radius: 7px
+                                    ">
+                
+                                    {% if book.book_rate > 0 %}
+                                        <img class='Rating_icon' style="height: 40px; width: 40px; margin-right: 20px" src="{% static 'library_app/images/smile' %}" alt="rate_icon">
+                                    {% elif book.book_rate == 0%}
+                                    <img class='Rating_icon' style="height: 40px; width: 40px; margin-right: 20px" src="{% static 'library_app/images/meh.png' %}" alt="rate_icon">
+                                    {% else %}
+                                        <img class='Rating_icon' style="height: 25px; width: 25px; margin-right: 20px" src="{% static 'library_app/images/sad' %}" alt="rate_icon">
+                                    {% endif%}
+                                    {{book.book_rate}}
+                                    </div>
+                                    {% endif %}
+                                    </span>
+                                </h2>
+                            </div>
+                            {% endif%}
                 </div>
 
                 <h3>Описание книги</h3>
@@ -28,22 +131,154 @@
                     {{book.book_description|safe}}
                 </div>
 
-                <div class="acts">
-                    Главы
-                </div>
 
-                <div class='tbody'>
-                    <table>
-                        <tr><th>Глава</th><th>Дата добавления</th><th>Статус</th></tr>
-                        <tr><td><a href=''>Название_главы<a></td><td>15.12.2021</td><td><div class="book_status">Прочитано</div></td></tr>
-                        <tr><td><a href=''>Название_главы<a></td><td>15.12.2021</td><td><div class="book_status">Прочитано</div></td></tr>
-                    </table>
+                <div class="accordion-menu">
+                    <button class="accordion">Главы</button>
+                    <div class="panel">
+                        <div class="act-table">
+                            <table id="myTable">
+                                <tr class="table-header">
+                                <th style="width:40%;">Название</th>
+                                <th style="width:30%;">Дата добавления</th>
+                                <th style="width:30%;">Действие</th>
+                                </tr>
+                                {% if chapters%}
+                                {%for chapter in chapters%}
+                                    <tr class="table-content">
+                                    <td>
+                                        <span>{{chapter.chapter_title}} </span>
+                                    </td>
+                                    <td>{{chapter.chapter_creation_time|date:"d.m.Y"}}</td>
+                                    <td><a href="{% url 'chapter' book.id chapter.chapter_number %}" id='read_link'>Читать</a></td>
+                                    </tr>
+                                {%endfor%}
+                                {% endif %}
+                            </table>
+                            {%if request.user.id == book.book_author.id%}  
+                                <div class='table-data' style='margin:20px'>
+                                    <a href="{% url 'create_chapter' book.id%}" class='submit-button' style="text-decoration: none;">Создать главу</a>
+                                </div>
+                            {% else %}
+                                {% if not chapters%}
+                                <div class='announce'>
+                                    Книга "{{book.book_title}}" пока не содержит главы. 
+                                </div>
+                                {% endif %}
+                            {% endif %}
+                            <div class="end-table"></div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class='acts'>Отзывы</div>
+                <div class='comment_section'>
+                    {% if request.user.is_authenticated %}
+                    <form method='POST' enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        <div class='post_comment'>
+                            <div class='post_header'>
+                                <img src='{%if request.user.profile.profile_picture%} 
+                                {{request.user.profile.profile_picture.url}}
+                                {%endif%}'></img> <span>{{request.user.profile.nickname}} ({% now "SHORT_DATE_FORMAT" %}):</span>
+                            </div>
+                            <div class="post_body">
+                                {{form.text}}
+                                <button class="submit-button" style='margin: 5px 0px'>Оставить отзыв</button>
+                            </div>
+                        </div>
+                    <form>
+                    {% endif %}
+                    {% for comment in comments%}
+                    <div class='user_comment'>
+                        <div class='comment_header'>
+                            <img src='{%if request.user.profile.profile_picture%} 
+                                {{request.user.profile.profile_picture.url}}
+                                {%endif%}'></img> 
+                            <span>{{comment.author}} ({{comment.creation_time|date:"d.m.Y"}})
+                                {% if comment.author == request.user%}
+                                <a href='{% url 'del_com' comment.id book.id%}' style="color:#ffecd7; text-decoration: none; font-size: 10px"> (Удалить)</a>:
+                                {% endif %}
+                            </span>
+                        </div>
+                        <div class='comment_body'>
+                            {{comment.text|safe}}
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
             
 
             <div class='block-footer'>
-
             </div>
+
+            
+
+<style>
+.accordion {
+    background: #606060;
+    padding: 20px;
+    border: none;
+    border-top: #ffa382 solid 1px;
+    border-bottom: #ffa382 solid 1px;
+    color: #ffecd7;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    margin: 0px;
+}
+
+/* .active, .accordion:hover {
+    
+} */
+
+.accordion:after {
+    content: '\002B';
+    color: #ffecd7;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    
+    content: "\2212";
+}
+
+.panel {
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+</style>
+
+
+
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+
+
+
+
 {%endblock%}

@@ -4,19 +4,43 @@
 {% block content %}
         
      <!-- Блок "Новинки" -->
-
+    
         <div class="block">
             <div class="block-header">
                 <h2>
-                    <img class='News_icon'src="{% static 'library_app/images/new' %}" alt="new_icon">
-                    Новинки
+                    <!-- <img class='News_icon'src="{% static 'library_app/images/new' %}" alt="new_icon"> -->
+                    {% if request.user.is_authenticated%}
+                        Добро пожаловать, {{request.user.profile.nickname}}
+                    {% else %}
+                        Онлайн-библиотека любительской литературы
+                    {% endif %}
                 </h2>
             </div>
-            <div class="block-content">
+            <div class="block-content" style="padding-top: 10px">
+                {% for message in messages %}                    
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> 
+                        {{message}}
+                    </div>
+                {% endfor %}
+                
+                <div class="welcome-speech" style="margin-top: 10px">
+                    Онлайн-библиотека любительской литературы создана как для авторов-любителей, так и для обычных пользователей, которые увлекаются чтением. Чтение литературы возможно без регистрации, но перед тем, как создавать или оценивать литературу пользователь должен пройти регистрацию в веб-приложении и авторизоваться в свою учетную запись. После создания учетной записи и последующей авторизации пользователь может опубликовать ее.
+                </div>
+
+                <div class="acts" style="margin-top: 20px">
+                    <a href='{% url 'library' 'new'%}' class="choice">Недавно добавленные работы</a>
+                </div>
+
+                <div class="slider">
                 {% for el in book_shelf %}
                 <div class="ShelfItem">
                     <div class='BookImg'>
-                        <img src="{{el.book_picture.url}}" alt="">
+                        <img 
+                            src="{% if el.book_picture%}
+                                {{el.book_picture.url}}
+                            {% endif %}"
+                         alt="">
                     </div>
                     <div class="BookFooter">
                         <a href='{% url 'detail' el.id %}' class='book_title'>{{el.book_title}}</a>
@@ -32,17 +56,57 @@
                                 {{el.book_rate}}
                             </h3>
                             <h3 class='Views'>
-                                <img class='Views_icon'src="{% static 'library_app/images/view_icon' %}" alt="view_icon">
                                 {{el.book_views}}
+                                <img class='Views_icon'src="{% static 'library_app/images/view_icon' %}" alt="view_icon">
                             </h3>
                         </div>
                     </div>
                 </div>
                 {% endfor %}
+                </div>
+                
+                <div class="acts" >
+                    <a href='{% url 'library' 'popular'%}' class="choice">Популярные работы</a>
+                </div>
+
+                <div class="slider">
+                {% for el in popular_book_shelf %}
+                <div class="ShelfItem">
+                    <div class='BookImg'>
+                        <img 
+                            src="{% if el.book_picture%}
+                                {{el.book_picture.url}}
+                            {% endif %}"
+                         alt="">
+                    </div>
+                    <div class="BookFooter">
+                        <a href='{% url 'detail' el.id %}' class='book_title'>{{el.book_title}}</a>
+                        <div class="BookInfo">
+                            <h3 class='Rating'>
+                                {% if el.book_rate > 0 %}
+                                    <img class='Rating_icon'src="{% static 'library_app/images/smile' %}" alt="rate_icon">
+                                {% elif el.book_rate == 0%}
+                                <img class='Rating_icon'src="{% static 'library_app/images/meh.png' %}" alt="rate_icon">
+                                {% else %}
+                                    <img class='Rating_icon'src="{% static 'library_app/images/sad' %}" alt="rate_icon">
+                                {% endif%}
+                                {{el.book_rate}}
+                            </h3>
+                            <h3 class='Views'>
+                                {{el.book_views}}
+                                <img class='Views_icon'src="{% static 'library_app/images/view_icon' %}" alt="view_icon">
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                </div>
+
             </div>
             <div class='block-footer'>
 
             </div>
+
 
         </div>
 
@@ -50,7 +114,7 @@
 
         <!-- Блок "Новости" -->
 
-        <div class="block" id='news-block'>
+        {% comment %} <div class="block" id='news-block'>
 
             <div class='block-header' id='news-header'>
                 <h2>
@@ -87,7 +151,7 @@
 
             </div>
 
-        </div>
+        </div> {% endcomment %}
 
         <!-- Конец блока -->
 {% endblock %}

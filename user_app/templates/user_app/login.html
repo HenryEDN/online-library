@@ -13,12 +13,17 @@
             <div class="block-content">
                 <form method="POST" class="auth-reg-form" action=''>
                     {% csrf_token %}
-                    {% for message in messages %}
-                        {{message}}
+                    {% for message in messages %}                    
+                        <div class='errorlist'>
+                            {{message}}
+                        </div>
                     {% endfor %}
+                    <div class='center-block'>
                     <input type="text" placeholder="Введите логин" name='username'>
                     <input type="password" placeholder="Введите пароль" name='password'>
-                    <button type='submit'>Авторизоваться</button>
+                    <button type='submit'>Авторизоваться</button><br>
+                    <span>У вас нет аккаунта? <a href='{% url 'registration' %}'>Регистрация</a> </span>
+                    </div>
                 </form>
             </div>
 

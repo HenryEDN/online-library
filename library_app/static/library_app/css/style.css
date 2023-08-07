@@ -1,6 +1,7 @@
 body{
     margin: 0 auto;
     background: white;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Header style */
@@ -18,7 +19,7 @@ body{
 
 .link{
     font-family: 'Poppins', sans-serif;
-    background-color: #ffecd7;
+    background-color: #ffa382;
     border-radius: 7px;
     width: 6%;
     margin: 15px 0px 15px 15px;
@@ -26,15 +27,15 @@ body{
     text-decoration: none;
     border: none;
     padding: 5px;
-    color: #ffa382;
+    color: #444444;
     font-size: 18px;
     min-width: 100px;
     cursor: pointer;
 }
 
 .link:hover{
-    background-color: #ffa382;
-    color: white;
+    background-color: #ffecd7;
+    color: #444444;
 }
 
 .dropdown{
@@ -49,7 +50,7 @@ body{
     font-family: 'Poppins', sans-serif;
     padding: .75rem;
     border-radius: 15px;
-    color: #ffecd7;
+    color: #444444;
     opacity: 0;
     pointer-events: none;
     transform: translateY(-10px);
@@ -65,7 +66,7 @@ body{
 .dropdown.active > .link,
 .menu:hover {
     background-color: #ffa382;
-    color: white;
+    color: #444444;
 }
 
 .information-grid {
@@ -92,7 +93,7 @@ body{
     } 
     
     .dropdown-links > a:hover { 
-    background-size: 100% 2px; 
+    background-size: 100% 1px; 
     color: #ffa382; 
     }
 
@@ -102,9 +103,14 @@ body{
     font-family: 'Poppins', sans-serif; 
   }
 
-  .topic{
+  .topic > b{
+     font-size: 20px;
      color:#ffa382; 
   }
+
+  /* .topic > b{
+    
+  } */
 
 .searchBar{
     margin: 15px 0px 15px 18px;
@@ -112,15 +118,15 @@ body{
 }
 
 .searchBar-input{
-    color: #ffa382;
+    color: #444444;
     border: none;
-    border-radius: 7px 0px 0px 7px;
+    border-radius: 7px;
     padding: 10px;
     font-size: 14px;
     margin-right: 0;
 }
 .searchBar-input::placeholder{
-    color: #ffa382;
+    color: #444444;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -128,7 +134,7 @@ body{
     background-color: #ffecd7;
     color: #ffa382;
     border: none;
-    border-radius: 0px 7px 7px 0px;
+    border-radius: 7px 7px 7px 7px;
     padding: 10px;
     font-size: 14px;
     margin-left: -5px;
@@ -144,7 +150,7 @@ body{
 .searchBar-image{
     height: 12px;
     width: 12px;
-    margin: 0px 10px 0px 10px
+    margin: 10px 10px 10px 10px
 }
 
 
@@ -154,6 +160,17 @@ body{
     margin-left: auto;  
     font-family: 'Poppins', sans-serif; 
     font-weight: bold;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%; 
+    background-repeat: no-repeat; 
+    background-size: 0% 2px; 
+    transition: background-size .3s; 
+    cursor: pointer;
+}
+
+.header>a:hover{
+    color: #ffecd7;
+    background-size: 100% 1px; 
 }
 
 
@@ -165,9 +182,10 @@ body{
     margin-left: 15px;
     margin-right: 15px;
     border: none;
-    padding: 23px 23px;
     color: #ffa382;
     border: #ffa382 solid 3px;
+    height: 60px;
+    width: 60px;
 }
 
 .second-button{
@@ -185,8 +203,8 @@ body{
 }
 
 .second-button:hover{
-    background-size: 100% 2px; 
-    color: #ffa382; 
+    background-size: 100% 1px; 
+    color: #ffecd7; 
 }
 
 .auth_reg_but{
@@ -209,7 +227,7 @@ body{
     display: flex;
     justify-content: center;
     background-color: #606060;
-    padding: 20px;
+    /* padding: 5px; */
     margin-top: 7px;
     border-radius:7px 7px 0 0;
     border-bottom: 3px solid #ffa382;
@@ -219,6 +237,8 @@ body{
     color: #ffecd7;
     font-family: 'Poppins', sans-serif; 
     font-size: 25px;
+    /* padding: 0px 5px;
+    margin: 10px 0px; */
 }
 
 
@@ -227,20 +247,48 @@ body{
     justify-content: center;
     text-align: center;
     background-color: #8e8e93;
-    padding: 10px;
+    padding-top: 200px;
+    padding-bottom: 20px;
 }
  
 .block-footer {
     background-color: #606060;
     border-radius: 0 0 7px 7px;
     padding: 20px;
+    margin-bottom: 20px;
 }
 
 /* Body style */
 
 
 
-/* Footer style */
+/* CK style */
 
+.alert {
+    padding: 20px;
+    background-color: #ffcc00;
+    color: #444444;
+}
 
-/* Footer style */
+.closebtn {
+    margin-left: 15px;
+    color: #444444;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}
+
+.announce{
+    padding: 20px;
+    color: #ffecd7;
+    font-size: 24px;
+}
+
+/* CK style */

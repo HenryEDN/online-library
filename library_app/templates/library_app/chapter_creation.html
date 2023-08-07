@@ -1,0 +1,45 @@
+{% extends 'library_app/template.html' %}
+{% load static %}
+
+{% block header %}
+    Создание главы
+{%endblock%}
+
+{% block content %}
+
+<link rel="stylesheet" href={% static 'library_app/css/chapter_style.css' %}>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
+        <div class="block">
+            <div class="block-header">
+                <h2>
+                    Создание главы для "<a href='{% url 'detail' book.id %}' style="text-decoration: none; color: #ffecd7; cursor: pointer; ">{{book.book_title}}</a>"
+                </h2>
+            </div>
+            <div class="block-content">
+                {% for message in messages %}                    
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> 
+                        {{message}}
+                    </div>
+                {% endfor %}
+                <div class='creation_body'>
+                    <form method='POST' enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        
+                        <label class='field_label'>Название главы:</label><br>
+                        {{form.chapter_title}}<br>
+                        <label class='field_label'>Содержание главы:</label><br>
+                        {{form.chapter_content}}
+                        
+                        <div style="text-align: center">
+                            <button class="submit-button" >Опубликовать</button>
+                        </div>
+                    </form>
+                </div>    
+            </div>
+            <div class='block-footer'>
+
+            </div>
+{%endblock%}

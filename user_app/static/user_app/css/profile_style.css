@@ -4,6 +4,13 @@
     text-align: center;
 }
 
+#read_link{
+
+    text-decoration: none;
+    cursor: pointer;
+    color: #ffecd7;
+}
+
 
 .Profile_icon{
     height: 25px;
@@ -22,11 +29,11 @@
 }
 
 .profile-image{
-    border: #ffa382 solid 2px;
+    /* border: #ffa382 solid 1px; */
     background-color:#ffecd7;
     width: 200px;
     height: 200px;
-    border-radius: 15px;
+    border-radius: 100%;
 }
 
 .profile-user-data{
@@ -40,30 +47,266 @@
     
 }
 
-.profile-user-data > h1{
+.profile-user-image-data > h1{
     color: #ffecd7;
     font-family: 'Poppins', sans-serif; 
-    font-size: 44px;
-    margin: 0;
-    padding: 0px;
-}
-.profile-user-data > h2{
-    padding: 0px;
-    margin: 0px;
-    color:#ffecd7;
     font-size: 22px;
+    margin: 0;
+    padding: 1px;
+}
+
+.profile-user-image-data > a{
+    text-decoration: none;
+    padding: 5px 12px;
+    background: #ffecd7;
+    border: none;
+    border-radius: 7px;
     font-family: 'Poppins', sans-serif; 
+    font-size: 12px;
+    color: #444444;
+    cursor: pointer;
+}
+
+.profile-user-image-data > a:hover{
+    background:#ffa382;
+    color: #ffecd7;
+}
+
+.profile-user-data > h2{
+    color: #ffecd7;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 22px;
+    margin: 0;
+    padding: 3px;
+    text-align: justify;
+}
+
+.profile-user-data > h3{
+    color: #ffecd7;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 22px;
+    margin: 0;
+    padding: 3px;
 }
 
 .profile-user-data-description{
     
-    padding: 10px;
-    border:#ffa382 solid 2px;
+    padding: 5px;
+    /* border:#ffa382 solid 1px; */
     border-radius: 7px;
     background-color:#606060;
-    width: auto;
+    min-width: 600px;
+    min-height: 230px;
  }
 
+.profile-user-data-description > p{
+    margin: 0px;
+}
 
+#Userbook{
+    background-color: #606060;
+}
+
+/* Style the tab */
+.tab {
+    text-align: center;
+    overflow: hidden;
+    background: #606060;
+    border-top: #ffa382 solid 1px;
+    border-bottom: #ffa382 solid 1px;
+    color: #ffecd7;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 19px;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    outline: none;
+    padding: 14px 16px;
+    transition: 0.3s;
+    background: #606060;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 16px;
+    color: #ffecd7;
+    cursor: pointer;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background:#ffecd7;
+    color: #444444;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background:#ffecd7;
+    color: #444444;
+}
+
+/* Style the tab content */
+.tabcontent {
+    text-align: center;
+    background-color: #8e8e93;
+    display: none;
+    border-top: none;
+}
+
+.Close_content{
+    font-size: 18px;
+    background-color: #ffecd7;
+    border-radius: 7px;
+    color: #444444;
+    cursor: pointer; 
+    padding: 12px;
+    outline: none;
+    border: none;
+    width: 90%;
+    margin: 10px;
+}
+
+.Close_content:hover{
+    background:#ffa382;
+    color: #444444;
+}
+
+#myTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #606060;
+    font-size: 18px;
+  }
+  
+  #myTable th, #myTable td {
+    text-align: left;
+    padding: 15px;
+  }
+  
+  #myTable tr {
+    border-bottom: 1px solid #606060;
+  }
+  
+  #myTable tr.table-header{
+    background-color: #606060;
+    color: #ffa382;
+  }
+
+  
+
+  /* #myTable tr.table-content:hover {
+    background-color: #ffecd7;
+    color: #606060;
+  } */
+
+  #myTable tr.table-content{
+      padding: 0px;
+      background-color: #8e8e93;
+      color: #ffecd7;
+  }
+
+
+  .book-image{
+    background-color: #ffecd7;
+    width: 55px;
+    height: 75px;
+    border: 1px solid #606060;
+  }
+
+
+  .table-data>.book-image,
+  .table-data>span{
+      vertical-align: middle;
+  }
+
+  .table-data>.book-image{
+      border-radius: 12px;
+  }
+
+  .Book-table{
+      background-color: #8e8e93;
+      padding-bottom: 20px;
+  }
+
+  .end-table{
+      background-color: #606060;
+      padding-bottom: 5px;
+  }
+
+  .delete{
+      text-decoration: none;
+      text-align: center;
+      background: #ff3b30;
+      border: none;
+      border-radius: 7px;
+      color: white;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 24px;
+  }
+
+  .delete:hover{
+      background: #ce2f26;
+  }
+
+  .edit{
+    text-decoration: none;
+    text-align: center;
+    background: #ffcc00;
+    border: none;
+    border-radius: 7px;
+    color: #444444;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.edit:hover{
+    background: #cfa601;
+    color: white;
+}
+
+.create{
+    text-decoration: none;
+    text-align: center;
+    background: #4cd964;
+    border: none;
+    border-radius: 7px;
+    color: white;
+    padding: 10px 17px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.create:hover{
+    background: #3ba74d;
+}
+
+  .button-row{
+      text-align: center;
+  }
+
+  .published{
+      width: 20px;
+      height: 20px;
+  }
+
+  .submit-button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 8px 116px;
+    background: #ffecd7;
+    border: none;
+    border-radius: 7px;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 16px;
+    color: #444444;
+    cursor: pointer;
+}
+
+.submit-button:hover{
+    background:#ffa382;
+    color: #444444;
+}
 
 /* Конец блока */

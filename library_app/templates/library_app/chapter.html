@@ -1,0 +1,71 @@
+{% extends 'library_app/template.html' %}
+{% load static %}
+
+{% block meta %}
+
+{% endblock%}
+
+{% block header %}
+    Глава
+{%endblock%}
+
+{% block content %}
+
+<link rel="stylesheet" href={% static 'library_app/css/chapter_style.css' %}>
+
+        <div class="block">
+            <div class="block-header">
+                <h2>
+                    Книга: <a href='{% url 'detail' book.id %}' style="text-decoration: none; color: #ffecd7; cursor: pointer; ">{{book.book_title}}</a>
+                </h2>
+            </div>
+            <div class="block-content">
+                {% for message in messages %}                    
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> 
+                        {{message}}
+                    </div>
+                {% endfor %}
+                <div class='chapter-body'>
+                    <div class='chapter-navigation'>
+                        {% if chap_prev %}
+                            <a href="{% url 'chapter' book.id chap_prev %}" class="book-status">Предыдущая глава</a>
+                        {% else %}
+                            <a class="silent">Предыдущая глава</a>
+                        {%endif%}
+                        <a href='{% url 'detail' book.id %}' class="book-status">Вернуться на страницу книги</a>
+                        {% if chap_next %}
+                            <a href="{% url 'chapter' book.id chap_next %}"  class="book-status">Следующая глава</a>
+                        {% else %}
+                            <a class="silent">Следующая глава</a>
+                        {% endif %}
+                    </div>
+
+                    <div class='chapter-text'>
+                        {{ chapter.chapter_content|safe}}
+                    </div>
+
+                    <div class='chapter-navigation'>
+                        {% if chap_prev %}
+                            <a href="{% url 'chapter' book.id chap_prev %}" class="book-status">Предыдущая глава</a>
+                        {% else %}
+                            <a class="silent">Предыдущая глава</a>
+                        {%endif%}
+                        <a href='{% url 'detail' book.id %}' class="book-status">Вернуться на страницу книги</a>
+                        {% if chap_next %}
+                            <a href="{% url 'chapter' book.id chap_next %}"  class="book-status">Следующая Глава</a>
+                        {% else %}
+                            <a class="silent">Следующая глава</a>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            <div class='block-footer'>
+            </div>
+        </div>
+
+            
+
+
+{%endblock%}

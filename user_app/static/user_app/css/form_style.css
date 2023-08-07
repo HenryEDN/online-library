@@ -2,17 +2,17 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-top: 5%;
-    padding-bottom: 5%;
+    padding-top: 20px;
+    padding-bottom: 20px;
     padding-left: 30%;
     padding-right: 30%;
 }
 
-.auth-reg-form > input{
-    color: #ffa382;
+.center-block > input{
+    margin-top: 20px;
+    color: #444444;
     border: none;
-    margin: 15px 0px 15px 15px;
-    border-radius: 15px 15px 15px 15px;
+    border-radius: 7px;
     padding: 15px;
     font-size: 14px;
     background-color: #fff;
@@ -20,25 +20,55 @@
 
 }
 
-.auth-reg-form > input::placeholder{
-    color: #ffa382;
+.center-block > input::placeholder{
+    color: #444444;
     text-shadow: 1px;
 }
 
-.auth-reg-form > button{
+.center-block > button{
     
     margin: 20px auto 0 auto;
-    padding: 15px;
+    padding: 10px;
     background: #ffecd7;
     border: none;
-    border-radius: 15px;
+    border-radius: 7px;
     font-family: 'Poppins', sans-serif; 
     font-size: 16px;
-    color: #ffa382;
+    color: #444444;
     cursor: pointer;
+    margin-bottom: 20px;
+}
+.center-block > button:hover{
+    background:#ffa382;
+    color: #444444;
 }
 
-.auth-reg-form > button:hover{
-    background:#ffa382;
+.errorlist{
+    list-style-type: none;
+    color: white;
+    padding: 20px 5px;
+    margin-bottom: 5px;
+    background: #cfa601;
+    border-radius: 15px;
+    border: 1px solid #ffcc00;
+}
+
+.center-block {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+.center-block > span{
+    color: #ffecd7;
+    font-size: 16px;
+}
+
+.center-block > span > a{
+    text-decoration: none;
+    color: #ffa382;
+}
+
+.center-block > span > a:hover{
     color: #ffecd7;
 }

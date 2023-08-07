@@ -3,6 +3,7 @@ from django.contrib.auth import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm, Textarea, TextInput, widgets, PasswordInput
+from .models import Profile
 
 
 class CreateUserForm(UserCreationForm):
@@ -39,3 +40,9 @@ class UserLoginForm(AuthenticationForm, ModelForm):
     class Meta:
         model = User
         fields = ('username', 'password')
+
+
+class ProfileUpdateForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['nickname', 'about_user', 'profile_picture']

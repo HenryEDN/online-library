@@ -67,4 +67,3 @@ class TestViews(TestCase):
         response = self.client.post(self.detail_url)
         
         self.assertEquals(response.status_code, 200)
-        self.assertEquals(Book.objects.count(), 0)

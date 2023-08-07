@@ -9,20 +9,133 @@
 }
 
 .book-image{
-    border-radius: 15px;
+    border-radius: 7px;
+    background-color: #ffecd7;
     width: 275px;
     height: 350px;
+    /* border: 1px solid #ffa382; */
+}
+
+#read_link{
+
+    text-decoration: none;
+    cursor: pointer;
+    color: #ffecd7;
 }
 
 .book-detail{
-    width: 100%;
-    height: 100%;
+    width: 420px;
+    height: 350px;
     padding: 0 0px 10px 10px;
     text-align: justify;
 }
 
+.actions{
+    border-radius: 7px ;
+    border: 1px solid #606060;
+    background: #606060;
+    text-align: center;
+    height: 180px;
+    width: 180px;
+}
+
+/* 4cd964 */
+
+.actions > .book-status{
+    background-color: #ffecd7;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 7px;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 16px;
+    color: #444444;
+    cursor: pointer;
+    text-decoration:  none;
+}
+
+.actions > .active-status{
+    background-color: #ffa382;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 7px;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 16px;
+    color: #ffecd7;
+    text-decoration:  none;
+}
+
+.actions > .book-status:hover{
+    background: #ffecd7;
+    color: #444444;
+}
+
+.actions > .book-status:hover{
+    background: #ffa382;
+    color: #444444;
+}
+
+.actions > span{
+    color: #ffecd7;
+    
+}
+
+.actions > .Edit{
+    background-color: #ffcc00;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 8px 13px;
+    border: none;
+    border-radius: 7px;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 16px;
+    color: #444444;
+    cursor: pointer;
+    text-decoration:  none;
+}
+
+.actions > .Delete{
+    text-decoration: none;
+    background-color: #ff3b30;
+    margin-top: 60px;
+    padding: 8px 39px;
+    border: none;
+    border-radius: 7px;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+}
+
+.actions > .Edit:hover{
+    background: #cfa601;
+    color: white;
+}
+
+.actions > .Delete:hover{
+    background: #ce2f26;
+}
+
 .dynamic_content{
     color: #ffecd7;
+    text-decoration: none;
+}
+
+a.dynamic_content{
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%; 
+    background-repeat: no-repeat; 
+    background-size: 0% 2px; 
+    transition: background-size .3s; 
+    cursor: pointer;
+}
+
+a.dynamic_content:hover{
+    color: #ffc3ae;
+    background-size: 100% 1px; 
 }
 
 .book-detail-description{
@@ -33,11 +146,15 @@
     background: #606060;
     text-align: justify;
     padding: 10px;
-    border-radius: 15px;
-    border: #ffa382 solid 2px;
+    border-radius: 7px;
+    /* border: #ffa382 solid 1px; */
     color: #ffecd7;
     font-family: 'Poppins', sans-serif; 
     font-size: 17px;
+}
+
+.book-detail-description > p{
+    margin: 0;
 }
 
 
@@ -83,7 +200,197 @@ table{
     border-collapse: collapse;
 }
 
-.tbody{
+#myTable {
+    border-collapse: collapse;
+    width: 100%;
+    /* border: 1px solid #606060; */
+    font-size: 18px;
+}
+
+#myTable th, #myTable td {
+    text-align: left;
+    padding: 15px;
+}
+
+#myTable tr {
+    border-bottom: 1px solid #606060;
+}
+
+#myTable tr.table-header{
+    background-color: #606060;
+    color: #ffa382;
+}
+
+
+
+/* #myTable tr.table-content:hover, #read_link:hover {
+    background-color: #ffecd7;
+    color: #606060;
+} */
+
+#myTable tr.table-content{
+    padding: 0px;
+    background-color: #8e8e93;
+    color: #ffecd7;
+}
+
+#
+{
+
+    text-decoration: none;
+    cursor: pointer;
+    color: #ffecd7;
+}
+
+.end-table{
+    background-color: #606060;
+    padding-bottom: 5px;
+}
+
+.act-table{
+    background-color: #8e8e93;
+}
+
+.vote{
+    text-decoration: none;
+    background-color: #ffecd7;
+    margin-top: 60px;
+    padding: 10px 14px;
+    text-align: center;
+    border: none;
+    border-radius: 100%;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 20px;
+    color: #444444;
+    cursor: pointer;
+}
+
+.vote_active{
+    text-decoration: none;
+    background-color: #ffa382;
+    text-align: center;
+    margin-top: 60px;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 100%;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 20px;
+    color: #444;
+    cursor: pointer;
+}
+
+.accordion-menu{
+    margin-top: 20px;
+    padding-bottom: 20px;
+    background-color: #8e8e93;
+}
+
+.comment_section{
+    background-color: #8e8e93;
+    padding: 20px 0px;
+}
+
+.user_comment{
+    width: 100%;
+    height: 100%;
+    margin-bottom: 20px;
+}
+
+.comment_header{
+    display: inline-flex;
+    border: none;
+    border-bottom: 1px solid #ffa382;
+    align-items: center;
+    width: 95%;
+    padding: 10px 0px;
+    background-color: #606060;
+    border-radius: 7px 7px 0px 0px ;
+}
+
+.comment_header > span{
+    color: #ffecd7;
+}
+
+.comment_header > img{
+    border-radius: 100%; 
+    background-color: #ffa382; 
+    max-height: 40px;
+    max-width: 40px;
+    height: 40px;
+    width: 40px;
+    margin: 0px 10px;
+}
+
+.comment_body{
+    
+    width: 92%;
+    margin: 0 auto;
+    min-height: 50px;
+    padding: 1px 13.5px;
+    background-color: #606060;
+    border-radius: 0px 0px 7px 7px;
+    text-align: justify;
+    color: #ffecd7;
+    font-size: 17px;
+}
+
+.comment_body > p{
+    margin: 10px 0px;
+}
+
+.submit-button{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 8px 116px;
+    background: #ffecd7;
+    border: none;
+    border-radius: 7px;
+    font-family: 'Poppins', sans-serif; 
+    font-size: 16px;
+    color: #444444;
+    cursor: pointer;
+}
+
+.submit-button:hover{
+    background:#ffa382;
+    color: #ffecd7;
+}
+
+.post_body{
+    background-color: #606060;
+    border-radius: 0px 0px 7px 7px;
+    padding-top: 10px;
+    margin: 0 auto;
+    width: 95%;
+    margin-bottom: 20px;
+}
+
+.post_header{
+    display: inline-flex;
+    border: none;
+    border-bottom: 1px solid #ffa382;
+    align-items: center;
+    width: 95%;
+    padding: 10px 0px;
+    border-radius: 7px 7px 0px 0px ;
+    background-color: #606060;
+}
+
+.post_header > img{
+    border-radius: 100%; 
+    background-color: #ffa382; 
+    max-height: 40px;
+    max-width: 40px;
+    height: 40px;
+    width: 40px;
+    margin: 0px 10px;
+}
+
+.post_header > span{
+    color: #ffecd7;
+}
+
+/* .tbody{
     padding: 10px;
 }
 
@@ -115,4 +422,4 @@ tr > th{
 tr > td{
     color: #ffecd7;;
     font-size: 20px;
-}
+} */

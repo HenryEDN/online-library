@@ -53,3 +53,43 @@ class User_library(models.Model):
     class Meta:
         verbose_name = "Библиотека"
         verbose_name_plural = "Библиотеки"
+
+
+class User_book_rate(models.Model):
+
+
+    user = models.ForeignKey(User, on_delete=CASCADE, null=False)
+    book = models.ForeignKey(Book, on_delete=CASCADE, null=False)
+    rate = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"оценка {self.user} книге '{self.book}'"
+
+    class Meta:
+        verbose_name = "Оценка"
+        verbose_name_plural = "Оценки" 
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, on_delete=CASCADE)
+    book = models.ForeignKey(Book, on_delete=CASCADE)
+    text = RichTextField(blank=True, null=True)
+    creation_time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f'({self.book}) Comment {self.id} by {self.author}'
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+
+class BookStatusUser(models.Model):
+    author = models.ForeignKey(User, on_delete=CASCADE)
+    book = models.ForeignKey(Book, on_delete=CASCADE)
+    status = models.ForeignKey(Book_Status, on_delete=CASCADE)
+    creation_time = models.DateField(auto_now=True)
+
+
+    
+    class Meta:
+        verbose_name = 'Статус пользователя'
+        verbose_name_plural = 'Статусы пользователя'

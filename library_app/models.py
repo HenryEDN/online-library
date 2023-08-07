@@ -16,7 +16,7 @@ class Genre(models.Model):
     
 #Сущность Книга
 class Book(models.Model):
-    book_title = models.CharField(max_length=60)
+    book_title = models.CharField(max_length=60, unique=True)
     book_genre = models.ForeignKey(Genre, on_delete=CASCADE)
     book_picture = models.ImageField(null = True, blank=True, upload_to='images/')
     book_description = RichTextField(blank=True, null=True)
@@ -24,6 +24,7 @@ class Book(models.Model):
     book_creation_time = models.DateTimeField(auto_now=True)
     book_rate = models.IntegerField(default=0)
     book_views = models.IntegerField(default=0)
+    book_visible = models.BooleanField(default = False)
 
     def __str__(self):
         return self.book_title
@@ -38,6 +39,8 @@ class Chapter(models.Model):
     chapter_content = RichTextField(blank=True, null=True)
     book = models.ForeignKey(Book, on_delete=CASCADE)
     chapter_creation_time = models.DateTimeField(auto_now=True)
+    chapter_number = models.IntegerField(null=True)
+    chapter_visible = models.BooleanField(default = False)
 
     def __str__(self):
         return self.chapter_title

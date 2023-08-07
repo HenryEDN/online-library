@@ -1,0 +1,61 @@
+{% extends 'library_app/template.html' %}
+{% load static %}
+
+{% block header %}
+    Создание книги
+{%endblock%}
+
+{% block content %}
+
+<link rel="stylesheet" href={% static 'library_app/css/book_creation_style.css' %}>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+
+        <div class="block">
+            <div class="block-header">
+                <h2>
+                    Создание книги
+                </h2>
+            </div>
+            <div class="block-content">
+                
+                <div class='creation_body'>
+                    <form method='POST' enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        {% for message in messages %}                    
+                            <div class="alert">
+                                <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> 
+                                {{message}}
+                            </div>
+                        {% endfor %}
+                        
+                        <div class='wrapper'>
+                            <div class='profile_preview'> 
+                                <img id="output_image"src="{% if profile.profile_picture%}
+                                {{profile.profile_picture.url}}
+                            {% endif %}"></img>
+                                <div class='picture_input_field'>    
+                                    <label class="bruh">Картинка профиля</label><br>
+                                    {{form.profile_picture}}
+                                </div>
+                            </div>
+
+                            <div class='book_data'>
+                                <label>Имя пользователя</label><br>
+                                {{form.nickname}}<br>
+                            </div>  
+                        </div>
+
+                        <div class='book_description_field'>
+                            <label style="text-align: left;">О пользователе</label>
+                            {{form.about_user}}
+                        </div>
+
+                        <button class="submit-button">Обновить данные</button>
+                    </form>
+                </div>    
+            </div>
+            <div class='block-footer'>
+
+            </div>
+{%endblock%}

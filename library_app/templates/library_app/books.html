@@ -1,364 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="index_style.css">
-    <link rel="stylesheet" href="books_style.css">
-    <script src="script.js"></script>
-    <title>Online library</title>
-</head>
-<body>
-    <div class="header">
+{% extends 'library_app/template.html' %}
+{% load static %}
 
-        <div class="dropdown" data-dropdown>
-            <button class="link" data-dropdown-button> Меню </button>
-            <div class="dropdown-menu">
-                <div class="information-grid">
-                    <div class="topic"><b>Работы</b>
-                        <div class="dropdown-links">
-                            <a href="#" class="choice">Все работы</a>
-                            <a href="#" class="choice">Новые работы</a>
-                            <a href="#" class="choice">Популярные работы</a>
-                        </div>
-                    </div>
-                    <div class="topic"><b>Аккаунт</b>
-                        <div class="dropdown-links">
-                            <a href="#" class="choice">Профиль</a>
-                            <a href="#" class="choice">Библиотека пользователя</a>
-                            <a href="#" class="choice">Редактировать профиль</a>
-                        </div>
-                    </div>
-                    <div class="topic"><b>Создать работу</b>
-                        <div class="dropdown-links">
-                            <a href="#" class="choice">Написать</a>
-                            <a href="#" class="choice">Редактировать</a>
-                        </div>
-                    </div>
-                    <div class="topic"><b>О проекте</b>
-                        <div class="dropdown-links">
-                            <a href="#" class="choice">О нас</a>
-                            <a href="#" class="choice">Цель проекта</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{% block header %}
+    {{header}}
+{%endblock%}
+
+{% block content %}
+
+<!-- Блок "Новинки" -->
+
+    <div class="block">
+        <div class="block-header">
+            <h2>
+                {% comment %} <img class='News_icon'src="icons/new" alt="new_icon"> {% endcomment %}
+                {{header}} 
+            </h2>
         </div>
-
-        <input type="Text" name="Search" class="searchBar" placeholder="Поиск">
-        <a href="#" ><b>Username</b></a>
-        <div class="pfImage"></div>
-    </div>
-
-    <div class="body">
-
-        <!-- Блок "Новинки" -->
-
-        <div class="block">
-            <div class="block-header">
-                <h2>
-                    <img class='News_icon'src="icons/new" alt="new_icon">
-                    Новинки
-                </h2>
+        <div class="block-content">
+            {% for message in messages %}                    
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> 
+                    {{message}}
+                </div>
+            {% endfor %}
+            {% for el in book_shelf %}
+            <div class="ShelfItem">
+                <div class='BookImg'>
+                    <img 
+                        src="{% if el.book_picture%}
+                            {{el.book_picture.url}}
+                        {% endif %}"
+                        alt="">
+                </div>
+                <div class="BookFooter">
+                    <a href='{% url 'detail' el.id %}' class='book_title'>{{el.book_title}}</a>
+                    <div class="BookInfo">
+                        <h3 class='Rating'>
+                            {% if el.book_rate > 0 %}
+                                <img class='Rating_icon'src="{% static 'library_app/images/smile' %}" alt="rate_icon">
+                            {% elif el.book_rate == 0%}
+                            <img class='Rating_icon'src="{% static 'library_app/images/meh.png' %}" alt="rate_icon">
+                            {% else %}
+                                <img class='Rating_icon'src="{% static 'library_app/images/sad' %}" alt="rate_icon">
+                            {% endif%}
+                            {{el.book_rate}}
+                        </h3>
+                        <h3 class='Views'>
+                            {{el.book_views}}
+                            <img class='Views_icon'src="{% static 'library_app/images/view_icon' %}" alt="view_icon">
+                        </h3>
+                    </div>
+                </div>
             </div>
-            <div class="block-content">
-                <div class="ShelfItem">
-                    <div class='BookImg'>
-                        <div class='BookStatus' style="background-color: #ff3b30;">
-                            1
-                        </div>
-                        image
-                    </div>
-                    <div class="BookFooter">
-                        <h2>Book_name</h2>
-                        <div class="BookInfo">
-                            <h3 class='Rating'>
-                                <img class='Rating_icon'src="icons/smile" alt="rate_icon">
-                                240
-                            </h3>
-                            <h3 class='Views'>
-                                <img class='Views_icon'src="icons/view_icon" alt="view_icon">
-                                500
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ShelfItem">
-                    <div class='BookImg'>
-                        <div class='BookStatus' style="background-color: #ff3b30;">
-                        1
-                        </div>
-                        Image
-                    </div>
-                    <div class="BookFooter">
-                        <h2>Book_name</h2>
-                        <div class="BookInfo">
-                            <h3 class='Rating'>
-                                <img class='Rating_icon'src="icons/smile" alt="rate_icon">
-                                240
-                            </h3>
-                            <h3 class='Views'>
-                                <img class='Views_icon'src="icons/view_icon" alt="view_icon">
-                                500
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ShelfItem">
-                    <div class='BookImg'>
-                        <div class='BookStatus' style="background-color: #4cd964;">
-                        1
-                        </div>
-                        Image
-                    </div>
-                    <div class="BookFooter">
-                        <h2>Book_name</h2>
-                        <div class="BookInfo">
-                            <h3 class='Rating'>
-                                <img class='Rating_icon'src="icons/smile" alt="rate_icon">
-                                240
-                            </h3>
-                            <h3 class='Views'>
-                                <img class='Views_icon'src="icons/view_icon" alt="view_icon">
-                                500
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="ShelfItem">
-                    <div class='BookImg'>
-                        <div class='BookStatus' style="background-color: #4cd964;">
-                        1
-                        </div>
-                        Image
-                    </div>
-                    <div class="BookFooter">
-                        <h2>Book_name</h2>
-                        <div class="BookInfo">
-                            <h3 class='Rating'>
-                                <img class='Rating_icon'src="icons/smile" alt="rate_icon">
-                                240
-                            </h3>
-                            <h3 class='Views'>
-                                <img class='Views_icon'src="icons/view_icon" alt="view_icon">
-                                500
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="ShelfItem">
-                    <div class='BookImg'>
-                        <div class='BookStatus' style="background-color: #ffcc00;">
-                        1
-                        </div>
-                        Image
-                    </div>
-                    <div class="BookFooter">
-                        <h2>Book_name</h2>
-                        <div class="BookInfo">
-                            <h3 class='Rating'>
-                                <img class='Rating_icon'src="icons/sad" alt="rate_icon">
-                                -240
-                            </h3>
-                            <h3 class='Views'>
-                                <img class='Views_icon'src="icons/view_icon" alt="view_icon">
-                                500
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ShelfItem">
-                    <div class='BookImg'>
-                        <div class='BookStatus' style="background-color: #ffcc00;">
-                        1
-                        </div>
-                        Image
-                    </div>
-                    <div class="BookFooter">
-                        <h2>Book_name</h2>
-                        <div class="BookInfo">
-                            <h3 class='Rating'>
-                                <img class='Rating_icon'src="icons/sad" alt="rate_icon">
-                                -240
-                            </h3>
-                            <h3 class='Views'>
-                                <img class='Views_icon'src="icons/view_icon" alt="view_icon">
-                                500
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ShelfItem">
-                    <div class='BookImg'>
-                        <div class='BookStatus' style="background-color: #ff3b30;">
-                            1
-                        </div>
-                        image
-                    </div>
-                    <div class="BookFooter">
-                        <h2>Book_name</h2>
-                        <div class="BookInfo">
-                            <h3 class='Rating'>
-                                <img class='Rating_icon'src="icons/smile" alt="rate_icon">
-                                240
-                            </h3>
-                            <h3 class='Views'>
-                                <img class='Views_icon'src="icons/view_icon" alt="view_icon">
-                                500
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ShelfItem">
-                    <div class='BookImg'>
-                        <div class='BookStatus' style="background-color: #ff3b30;">
-                        1
-                        </div>
-                        Image
-                    </div>
-                    <div class="BookFooter">
-                        <h2>Book_name</h2>
-                        <div class="BookInfo">
-                            <h3 class='Rating'>
-                                <img class='Rating_icon'src="icons/smile" alt="rate_icon">
-                                240
-                            </h3>
-                            <h3 class='Views'>
-                                <img class='Views_icon'src="icons/view_icon" alt="view_icon">
-                                500
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ShelfItem">
-                    <div class='BookImg'>
-                        <div class='BookStatus' style="background-color: #4cd964;">
-                        1
-                        </div>
-                        Image
-                    </div>
-                    <div class="BookFooter">
-                        <h2>Book_name</h2>
-                        <div class="BookInfo">
-                            <h3 class='Rating'>
-                                <img class='Rating_icon'src="icons/smile" alt="rate_icon">
-                                240
-                            </h3>
-                            <h3 class='Views'>
-                                <img class='Views_icon'src="icons/view_icon" alt="view_icon">
-                                500
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="ShelfItem">
-                    <div class='BookImg'>
-                        <div class='BookStatus' style="background-color: #4cd964;">
-                        1
-                        </div>
-                        Image
-                    </div>
-                    <div class="BookFooter">
-                        <h2>Book_name</h2>
-                        <div class="BookInfo">
-                            <h3 class='Rating'>
-                                <img class='Rating_icon'src="icons/smile" alt="rate_icon">
-                                240
-                            </h3>
-                            <h3 class='Views'>
-                                <img class='Views_icon'src="icons/view_icon" alt="view_icon">
-                                500
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="ShelfItem">
-                    <div class='BookImg'>
-                        <div class='BookStatus' style="background-color: #ffcc00;">
-                        1
-                        </div>
-                        Image
-                    </div>
-                    <div class="BookFooter">
-                        <h2>Book_name</h2>
-                        <div class="BookInfo">
-                            <h3 class='Rating'>
-                                <img class='Rating_icon'src="icons/sad" alt="rate_icon">
-                                -240
-                            </h3>
-                            <h3 class='Views'>
-                                <img class='Views_icon'src="icons/view_icon" alt="view_icon">
-                                500
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ShelfItem">
-                    <div class='BookImg'>
-                        <div class='BookStatus' style="background-color: #ffcc00;">
-                        1
-                        </div>
-                        Image
-                    </div>
-                    <div class="BookFooter">
-                        <h2>Book_name</h2>
-                        <div class="BookInfo">
-                            <h3 class='Rating'>
-                                <img class='Rating_icon'src="icons/sad" alt="rate_icon">
-                                -240
-                            </h3>
-                            <h3 class='Views'>
-                                <img class='Views_icon'src="icons/view_icon" alt="view_icon">
-                                500
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="paginator">
-                    <button class="Backwards">Назад</button>
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <button class="Forwards">Далее</button>
-                </div>
-
-            </div>
+            {% endfor %}
             
-            <div class='block-footer'>
+            {% if book_shelf.has_previous or book_shelf.has_next%}
 
+            <div class="pagination">
+                {% if book_shelf.has_previous %}
+                <a href="{% url 'library' sort %}?page={{book_shelf.previous_page_number}}">&laquo;</a>
+                {% endif %}
+
+                {% if pages %}
+                    {% for page in pages%}
+                        <a 
+                        {% if page == current_page%} 
+                            class='active' 
+                        {% else %}
+                            href="{% url 'library' sort %}?page={{page}}"
+                        {% endif %}
+                        >{{page}}</a>
+                    {% endfor%}
+                {% endif %}
+                {% comment %} <a class="active" href="#">2</a> {% endcomment %}
+
+                {% if book_shelf.has_next %}
+                <a href="{% url 'library' sort %}?page={{book_shelf.next_page_number}}">&raquo;</a>
+                {% endif %}
             </div>
+            {% endif %}
+            {% comment %} {% endif %} {% endcomment %}
+        </div>
+        <div class='block-footer'>
 
         </div>
-
     </div>
-
-    <!-- Конец блока -->
-</div>
-<div class="footer">
-    
-</div>
-</body>
-</html>
+{%endblock%}

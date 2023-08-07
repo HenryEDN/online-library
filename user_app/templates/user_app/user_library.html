@@ -1,0 +1,92 @@
+{% extends 'library_app/template.html' %}
+{% load static %}
+
+{% block header %}
+    {{book.book_title}}
+{%endblock%}
+
+{% block content %}
+<link rel="stylesheet" href={% static 'user_app/css/profile_style.css' %}>
+
+
+
+
+        <div class="block">
+            <div class="block-header">
+                <h2>
+                    Ваши работы ({{books.count}})
+                </h2>
+            </div>
+            <div class="block-content" style="padding-top: 10px; padding-bottom: 10px;">
+                {% for message in messages %}                    
+                    <div class="alert">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">×</span> 
+                        {{message}}
+                    </div>
+                {% endfor %}
+            <div class='searchBar'>
+                <form action='{% url 'booklist' request.user.id %}' method='get'>
+                <input type="Text" name="q" class="searchBar-input" placeholder="Поиск книги" style="width: 300px">
+                <!-- <button type="Submit" class="searchBar-button">
+                    <img src="{% static 'library_app/images/search.png' %}" alt="" class="searchBar-image">
+                </button> -->
+                </form>
+            </div>
+
+            <form action='' method='POST'>
+                {% csrf_token %}
+            <table id="myTable" style="margin-top: 20px">
+                <tr class="table-header">  
+                    <th style="width:30%;">Название</th>
+                    <th style="width:10%;">Дата добавления</th>
+                    <th style="width:1%; text-align: center;">Видимость</th>
+                    <th style="width:25%; text-align: center;">Действия</th>
+                </tr>
+                
+                <tr class="table-content">
+                    {%for book in books%}    
+                        <tr class="table-content">
+                            <td>
+                                <div class="table-data">
+                                    <img class="book-image"
+                                        src="{% if book.book_picture%}
+                                                {{book.book_picture.url}}
+                                            {% endif %}"
+                                    alt=""></img>
+                                    {% comment %} <a href='{% url 'detail' book.id %}'>{{book.book_title}}</a> {% endcomment %}
+                                    <span><a href='{% url 'detail' book.id%}' id='read_link'>{{book.book_title}}</a></span>
+                                </div>
+                            </td>
+                            <td>{{book.book_creation_time|date:"d.m.Y"}}</td>
+                            <td style='text-align: center'>
+                                <input type="checkbox" name="boxes" class="published" {% if book.book_visible%}checked{%endif%} value={{book.id}}>
+                            </td>
+                            <td> 
+                                <div class="button-row">
+                                    <a class='create' href='{% url 'create_chapter' book.id%}'>+</a>
+                                    <a class='edit' href='{% url 'update' book.id %}'>✎</a>
+                                    <a class='delete' href='{% url 'delete' book.id%}'>✕</a>
+                                </div>
+                            </td>
+                        </tr>
+                    
+                    {%endfor%}
+            </table>
+            
+            <div class='table-data' style='margin: 40px 20px'>
+                <a href="{% url 'create'%}" class='submit-button' style="text-decoration: none;">Создать книгу</a>
+            </div>
+            <div class="end-table" style='margin-bottom: 10px'></div>
+            {% if books%}
+            <button type='Submit' class='submit-button'>Применить изменения</button>
+            {% endif %}
+        </form>
+        </div>
+    </div>
+
+    
+
+    <div class='block-footer'>
+    </div>
+
+{% endblock %}
